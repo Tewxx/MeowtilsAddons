@@ -270,31 +270,8 @@ public class LevelFaker extends Module {
                 sb.append(tag);
                 sb.append(formatted.substring(repEnd > repStart ? repEnd : repStart));
                 event.message = new ChatComponentText(sb.toString());
-                return;
             }
-
-            String bareFull = stripColors(formatted);
-            if (bareFull == null) return;
-            String upperBare = bareFull.toUpperCase(java.util.Locale.ROOT);
-            String upperSelf = self == null ? null : self.toUpperCase(java.util.Locale.ROOT);
-            int nameIdxBare = -1;
-            int youIdx = upperBare.indexOf("YOU");
-            if (youIdx >= 0) nameIdxBare = youIdx;
-            if (nameIdxBare < 0 && upperSelf != null) nameIdxBare = upperBare.indexOf(upperSelf);
-            if (nameIdxBare < 0) return;
-
-            int insertIdx = mapBareIndexToFormatted(formatted, nameIdxBare);
-            if (insertIdx < 0 || insertIdx > formatted.length()) return;
-            if (insertIdx >= colonPos) return;
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(formatted, 0, insertIdx);
-            if (insertIdx > 0 && !Character.isWhitespace(formatted.charAt(insertIdx - 1))) {
-                sb.append(' ');
-            }
-            sb.append(tag).append(' ');
-            sb.append(formatted.substring(insertIdx));
-            event.message = new ChatComponentText(sb.toString());
+            return;
         } catch (Throwable ignored) {}
     }
 
